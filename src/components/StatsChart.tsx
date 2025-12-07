@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import type { CharacterStats } from './types';
+import type { CharacterStats } from '../types';
 
 interface StatsChartProps {
   stats: CharacterStats;
@@ -45,4 +45,5 @@ export const StatsChart: React.FC<StatsChartProps> = ({ stats, color }) => {
       </ResponsiveContainer>
     </div>
   );
+
 };
