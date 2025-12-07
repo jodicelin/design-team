@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import  { useState, useRef } from 'react';
 import { RobotTV } from './components/RobotTV';
 import { CharacterCard } from './components/CharacterCard';
 import { RulesModal } from './components/RulesModal';
@@ -8,9 +8,7 @@ import { SnowEffect } from './components/SnowEffect';
 import { IntroScreen } from './components/IntroScreen';
 import { CHARACTERS } from './constants';
 import type { AppState, DrawRecord } from './types';
-import { ClipboardList } from 'lucide-react';
-import { EyeTracker } from './components/EyeTracker';
-import metadata from './metadata.json';
+
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
