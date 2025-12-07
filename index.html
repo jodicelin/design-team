@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mina's Arcade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pop-bg': '#f4e4d4',      // New Background
+              'pop-pink': '#f583b6',    // New Pink
+              'pop-blue': '#4587ff',    // New Blue
+              'pop-green': '#26b468',   // New Green
+              'pop-yellow': '#fec63d',  // New Yellow
+              'pop-red': '#ff4006',     // New Red
+              'pop-black': '#000000',   // Pure Black
+              'pop-cyan': '#4587ff',    // Mapping old cyan to new blue for compatibility
+              'pop-orange': '#ff4006',  // Mapping old orange to new red for compatibility
+            },
+            fontFamily: {
+              sans: ['"Noto Sans TC"', 'sans-serif'], 
+              logo: ['"Noto Sans TC"', 'sans-serif'],
+              rounded: ['"Noto Sans TC"', 'sans-serif'],
+            },
+            boxShadow: {
+              'pop-sm': '2px 2px 0px 0px #000000',
+              'pop': '4px 4px 0px 0px #000000',
+              'pop-lg': '8px 8px 0px 0px #000000',
+              'pop-xl': '12px 12px 0px 0px #000000',
+            },
+            animation: {
+              'bounce-short': 'bounce 0.5s infinite',
+              'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+              'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+              'joystick-pull': 'joystickPull 0.4s ease-in-out forwards',
+              'float': 'float 3s ease-in-out infinite',
+              'spin-slow': 'spin 3s linear infinite',
+              'drop-in': 'dropIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+              'slide-in': 'slideIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'scatter': 'scatterOut 1.2s ease-in forwards',
+            },
+            keyframes: {
+              shake: {
+                '10%, 90%': { transform: 'translate3d(-2px, 0, 0)' },
+                '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+                '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+                '40%, 60%': { transform: 'translate3d(6px, 0, 0)' }
+              },
+              popIn: {
+                '0%': { opacity: '0', transform: 'scale(0.5) translateY(100px) rotate(-10deg)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0) rotate(0deg)' }
+              },
+              joystickPull: {
+                '0%': { transform: 'rotateX(0deg) translateY(0)' },
+                '50%': { transform: 'rotateX(40deg) translateY(10px)' },
+                '100%': { transform: 'rotateX(0deg) translateY(0)' }
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' }
+              },
+              scanHorizontal: {
+                '0%, 100%': { transform: 'translateX(-80px) rotate(-10deg)' },
+                '50%': { transform: 'translateX(80px) rotate(10deg)' }
+              },
+              dropIn: {
+                '0%': { transform: 'translateY(-150vh) rotate(var(--tw-enter-rotate))' },
+                '60%': { transform: 'translateY(20px) rotate(var(--tw-enter-rotate))' },
+                '80%': { transform: 'translateY(-10px) rotate(var(--tw-enter-rotate))' },
+                '100%': { transform: 'translateY(0) rotate(var(--tw-enter-rotate))' }
+              },
+              slideIn: {
+                '0%': { transform: 'translate(var(--tw-enter-x), var(--tw-enter-y)) rotate(var(--tw-enter-rotate))' },
+                '100%': { transform: 'translate(0, 0) rotate(var(--tw-enter-rotate))' }
+              },
+              scatterOut: {
+                '0%': { transform: 'translate(0, 0) rotate(var(--tw-enter-rotate))', opacity: '1' },
+                '100%': { transform: 'translate(var(--tw-exit-x), var(--tw-exit-y)) rotate(var(--tw-exit-rotate))', opacity: '0' }
+              }
+            },
+            cursor: {
+              'arrow': `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="%23fec63d" stroke="%23000000" stroke-width="2"><path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" stroke-linejoin="round" stroke-linecap="round"/></svg>') 2 2, auto`,
+              'magnify': `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2"><circle cx="10" cy="10" r="7" fill="%23fec63d" fill-opacity="0.2" /><path d="M21 21L15 15" stroke-width="4" stroke-linecap="round"/></svg>') 20 20, auto !important`,
+            }
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jf-openhuninn-1.1/jf-openhuninn-1.1.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f4e4d4;
+        font-family: 'Noto Sans TC', sans-serif;
+        /* Large Pop Arrow Cursor */
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="%23fec63d" stroke="%23000000" stroke-width="2.5"><path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" stroke-linejoin="round" stroke-linecap="round"/></svg>') 2 2, auto;
+      }
+
+      /* Custom Magnifying Glass Cursor Class */
+      .cursor-magnify {
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2.5"><circle cx="10" cy="10" r="7" fill="%234587ff" fill-opacity="0.3" stroke="%23000000" stroke-width="3" /><path d="M21 21L15 15" stroke-width="5" stroke-linecap="round" stroke="%23000000"/></svg>') 20 20, auto !important;
+      }
+
+      /* Sticker Die-cut Effect */
+      .sticker-shadow {
+        filter: drop-shadow(4px 4px 0px #000000) drop-shadow(0px 0px 0px 3px #FFFFFF);
+      }
+      
+      /* Subtle Grid Pattern */
+      .bg-grid-pattern {
+        background-image: 
+          linear-gradient(#0000000d 1px, transparent 1px),
+          linear-gradient(90deg, #0000000d 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+    </style>
+  </head>
+  <body class="bg-grid-pattern">
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.tsx"></script>
+    
+  </body>
+</html>

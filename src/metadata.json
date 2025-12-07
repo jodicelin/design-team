@@ -1,0 +1,5 @@
+ {
+  "name": "Mina's Retro Robot TV",
+  "description": "A cute, interactive retro TV robot that randomly selects character profiles with a glitchy animation style.",
+  "requestFramePermissions": []
+}
