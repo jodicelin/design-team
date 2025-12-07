@@ -7,7 +7,7 @@ interface StatsChartProps {
   color: string;
 }
 
-export const StatsChart: React.FC<StatsChartProps> = ({ stats, color }) => {
+export const StatsChart: React.FC<StatsChartProps> = ({ stats }) => {
   const data = [
     { name: 'Strength', value: stats.strength },
     { name: 'Patience', value: stats.patience },
